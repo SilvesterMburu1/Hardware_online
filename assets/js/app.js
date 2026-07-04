@@ -61,15 +61,19 @@ function displayProducts() {
             <td>${product.stock}</td>
 
             <td>
-                <td>
-    <button class="edit-btn" onclick="editProduct(${product.id})">
-        Edit
-    </button>
+            
+    <div class="action-buttons">
+        <button class="edit-btn" onclick="editProduct(${product.id})">
+            Edit
+        </button>
 
-    <button onclick="deleteProduct(${product.id})">
-        Delete
-    </button>
+        <button onclick="deleteProduct(${product.id})">
+            Delete
+        </button>
+    </div>
 </td>
+                
+  
             </td>
 
         </tr>

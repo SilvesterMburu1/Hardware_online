@@ -185,6 +185,10 @@ table button:hover{
     background:#1d4ed8;
 }
 
+.action-buttons{
+    display:flex;
+    gap:10px;
+}
 #searchInput{
     width:100%;
     padding:12px;
