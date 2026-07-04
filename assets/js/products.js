@@ -14,3 +14,17 @@ function addProduct(name, price, stock) {
     StorageManager.saveProducts(products);
 
 }
+
+function deleteProduct(id) {
+
+    let products = StorageManager.getProducts();
+
+    products = products.filter(product => product.id !== id);
+
+    StorageManager.saveProducts(products);
+
+    displayProducts();
+
+    updateDashboard();
+
+}
