@@ -157,3 +157,16 @@ table th{
     background:#1e3a8a;
     color:white;
 }
+
+table button{
+    background:#dc2626;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+table button:hover{
+    background:#b91c1c;
+}
