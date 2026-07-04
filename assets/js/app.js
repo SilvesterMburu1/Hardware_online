@@ -52,15 +52,21 @@ function displayProducts() {
 
         tbody.innerHTML += `
 
-            <tr>
+        <tr>
 
-                <td>${product.name}</td>
+            <td>${product.name}</td>
 
-                <td>KSh ${product.price}</td>
+            <td>KSh ${product.price}</td>
 
-                <td>${product.stock}</td>
+            <td>${product.stock}</td>
 
-            </tr>
+            <td>
+                <button onclick="deleteProduct(${product.id})">
+                    Delete
+                </button>
+            </td>
+
+        </tr>
 
         `;
 
