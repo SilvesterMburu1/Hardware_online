@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
     updateDashboard();
 
     displayProducts();
+  
+    loadProductsIntoSelect();
+  
   const searchInput = document.getElementById("searchInput");
 
 searchInput.addEventListener("input", displayProducts);
@@ -20,6 +23,9 @@ searchInput.addEventListener("input", displayProducts);
         const stock = document.getElementById("productStock").value;
 
         addProduct(name, price, stock);
+
+        loadProductsIntoSelect();
+      
 
         form.reset();
 
