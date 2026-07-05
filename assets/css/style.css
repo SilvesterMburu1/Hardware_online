@@ -213,3 +213,19 @@ table button:hover{
     outline:none;
     border-color:#2563eb;
 }
+
+.sales-section{
+    margin-top:40px;
+}
+
+.sales-section form{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.sales-section select,
+.sales-section input{
+    flex:1;
+    padding:12px;
+}
