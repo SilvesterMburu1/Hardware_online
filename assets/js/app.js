@@ -48,13 +48,22 @@ document.addEventListener("DOMContentLoaded", () => {
 function updateDashboard() {
 
     const products = StorageManager.getProducts();
-
     const sales = StorageManager.getSales();
 
     document.getElementById("productCount").textContent = products.length;
-
     document.getElementById("salesCount").textContent = sales.length;
 
+    // Total Revenue
+    const revenue = sales.reduce((total, sale) => {
+        return total + sale.total;
+    }, 0);
+
+    document.getElementById("revenue").textContent = revenue;
+
+    // Low Stock Products
+    const lowStock = products.filter(product => product.stock < 5);
+
+    document.getElementById("lowStock").textContent = lowStock.length;
 }
 
 function displayProducts() {
