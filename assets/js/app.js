@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
     updateDashboard();
 
     displayProducts();
+  const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("input", displayProducts);
 
     form.addEventListener("submit", function (e) {
 
@@ -45,10 +48,18 @@ function displayProducts() {
     const tbody = document.querySelector("#productTable tbody");
 
     tbody.innerHTML = "";
+  const search = document
+  .getElementById("searchInput")
+  .value
+  .toLowerCase();
 
     const products = StorageManager.getProducts();
+  
+  const filteredProducts = products.filter (product=>
+  product.name.toLowerCase().includes(search)
+  );
 
-    products.forEach(product => {
+    filteredProducts.forEach(product => {
 
         tbody.innerHTML += `
 
@@ -72,9 +83,6 @@ function displayProducts() {
         </button>
     </div>
 </td>
-                
-  
-            </td>
 
         </tr>
 

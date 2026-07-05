@@ -196,3 +196,20 @@ table button:hover{
     border:1px solid #ccc;
     border-radius:6px;
 }
+
+.search-section{
+    margin:25px 0;
+}
+
+#searchInput{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+#searchInput:focus{
+    outline:none;
+    border-color:#2563eb;
+}

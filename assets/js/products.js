@@ -51,8 +51,5 @@ function editProduct(id){
 
     StorageManager.saveProducts(products);
 
-    displayProducts();
-
-    updateDashboard();
-
+    
 }
