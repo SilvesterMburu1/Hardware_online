@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateDashboard();
     displayProducts();
+    displaySales();
     loadProductsIntoSelect();
 
     searchInput.addEventListener("input", displayProducts);
@@ -35,6 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const quantity = document.getElementById("saleQuantity").value;
 
         recordSale(productId, quantity);
+
+      displaySales();
 
         salesForm.reset();
         displayProducts();
@@ -66,11 +69,34 @@ function updateDashboard() {
     document.getElementById("lowStock").textContent = lowStock.length;
 }
 
-function displayProducts() {
+function displaySales() {
 
+    const tbody = document.querySelector("#salesTable tbody");
+
+    tbody.innerHTML = "";
+
+    const sales = StorageManager.getSales();
+
+    sales.forEach(sale => {
+
+        tbody.innerHTML += `
+            <tr>
+                <td>${sale.productName}</td>
+                <td>${sale.quantity}</td>
+                <td>KSh ${sale.total}</td>
+                <td>${sale.date}</td>
+            </tr>
+        `;
+
+    });
+
+}
+
+function displayProducts() {
     const tbody = document.querySelector("#productTable tbody");
 
     tbody.innerHTML = "";
+  
   const search = document
   .getElementById("searchInput")
   .value
@@ -96,8 +122,9 @@ function displayProducts() {
 
             <td>
             
+            
     <div class="action-buttons">
-        <button class="edit-btn" onclick="editProduct(${product.id})">
+        <button class="edit-btn" onclick="editProduct(${product.id})"> 
             Edit
         </button>
 
