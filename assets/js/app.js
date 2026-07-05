@@ -1,37 +1,45 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.getElementById("productForm");
+    const salesForm = document.getElementById("salesForm");
+    const searchInput = document.getElementById("searchInput");
 
     updateDashboard();
-
     displayProducts();
-  
     loadProductsIntoSelect();
-  
-  const searchInput = document.getElementById("searchInput");
 
-searchInput.addEventListener("input", displayProducts);
+    searchInput.addEventListener("input", displayProducts);
 
-    form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", function(e) {
 
         e.preventDefault();
 
         const name = document.getElementById("productName").value;
-
         const price = document.getElementById("productPrice").value;
-
         const stock = document.getElementById("productStock").value;
 
         addProduct(name, price, stock);
 
         loadProductsIntoSelect();
-      
-
         form.reset();
-
         displayProducts();
-
         updateDashboard();
+
+    });
+
+    salesForm.addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        const productId = document.getElementById("saleProduct").value;
+        const quantity = document.getElementById("saleQuantity").value;
+
+        recordSale(productId, quantity);
+
+        salesForm.reset();
+        displayProducts();
+        updateDashboard();
+        loadProductsIntoSelect();
 
     });
 
