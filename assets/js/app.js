@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     searchInput.addEventListener("input", displayProducts);
 
-    form.addEventListener("submit", function(e) {
+    form.addEventListener("submit", function (e) {
 
         e.preventDefault();
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
-    salesForm.addEventListener("submit", function(e) {
+    salesForm.addEventListener("submit", function (e) {
 
         e.preventDefault();
 
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         recordSale(productId, quantity);
 
-      displaySales();
+        displaySales();
 
         salesForm.reset();
         displayProducts();
@@ -57,21 +57,20 @@ function updateDashboard() {
     document.getElementById("salesCount").textContent = sales.length;
 
     // Total Revenue
-    const revenue = sales.reduce((total, sale) => {
-        return total + sale.total;
-    }, 0);
-
+    const revenue = sales.reduce((total, sale) => total + sale.total, 0);
     document.getElementById("revenue").textContent = revenue;
 
     // Low Stock Products
     const lowStock = products.filter(product => product.stock < 5);
-
     document.getElementById("lowStock").textContent = lowStock.length;
+
 }
 
 function displaySales() {
 
     const tbody = document.querySelector("#salesTable tbody");
+
+    if (!tbody) return;
 
     tbody.innerHTML = "";
 
@@ -93,51 +92,61 @@ function displaySales() {
 }
 
 function displayProducts() {
+
     const tbody = document.querySelector("#productTable tbody");
 
+    if (!tbody) return;
+
     tbody.innerHTML = "";
-  
-  const search = document
-  .getElementById("searchInput")
-  .value
-  .toLowerCase();
+
+    const search = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
 
     const products = StorageManager.getProducts();
-  
-  const filteredProducts = products.filter (product=>
-  product.name.toLowerCase().includes(search)
-  );
+
+    const filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(search)
+    );
 
     filteredProducts.forEach(product => {
 
         tbody.innerHTML += `
+            <tr>
+                <td>${product.name}</td>
+                <td>KSh ${product.price}</td>
+                <td>${product.stock}</td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="edit-btn" onclick="editProduct(${product.id})">
+                            Edit
+                        </button>
 
-        <tr>
-
-            <td>${product.name}</td>
-
-            <td>KSh ${product.price}</td>
-
-            <td>${product.stock}</td>
-
-            <td>
-            
-            
-    <div class="action-buttons">
-        <button class="edit-btn" onclick="editProduct(${product.id})"> 
-            Edit
-        </button>
-
-        <button onclick="deleteProduct(${product.id})">
-            Delete
-        </button>
-    </div>
-</td>
-
-        </tr>
-
+                        <button onclick="deleteProduct(${product.id})">
+                            Delete
+                        </button>
+                    </div>
+                </td>
+            </tr>
         `;
 
     });
+
+}
+
+function showToast(message) {
+
+    const toast = document.getElementById("toast");
+
+    if (!toast) return;
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
 
 }

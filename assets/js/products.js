@@ -12,7 +12,7 @@ function addProduct(name, price, stock) {
     products.push(product);
 
     StorageManager.saveProducts(products);
-
+    showToast("Product added successfully!");
 }
 
 function deleteProduct(id) {
@@ -22,7 +22,7 @@ function deleteProduct(id) {
     products = products.filter(product => product.id !== id);
 
     StorageManager.saveProducts(products);
-
+    showToast("Product deleted successfully!");
     displayProducts();
 
     updateDashboard();
@@ -50,6 +50,11 @@ function editProduct(id){
     product.stock = Number(newStock);
 
     StorageManager.saveProducts(products);
+
+  displayProducts();
+  updateDashboard();
+  loadProductsIntoSelect();
+  showToast("Product updated successfully!");
 
     
 }

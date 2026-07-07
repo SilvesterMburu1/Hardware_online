@@ -67,4 +67,6 @@ alert("Stock: " + product.stock + "\nQuantity: " + quantity);
     StorageManager.saveProducts(products);
     StorageManager.saveSales(sales);
 
+  showToast("Sale recorded successfully!");
+
 }
