@@ -355,3 +355,15 @@ main{
     opacity:1;
     transform:translateX(0);
 }
+
+.reports-section{
+    margin-top:40px;
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.reports-section h2{
+    margin-bottom:20px;
+}
