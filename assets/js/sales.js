@@ -16,7 +16,7 @@ function loadProductsIntoSelect() {
   });
 }
 
-function recordSale(productId, quantity) {
+function recordSale(productId, quantity, paymentMethod) {
   const products = StorageManager.getProducts();
   const sales = StorageManager.getSales();
 
@@ -48,6 +48,7 @@ function recordSale(productId, quantity) {
     quantity: quantity,
     total: product.price * quantity,
     profit: (product.price - product.cost) * quantity,
+    paymentMethod: paymentMethod,
     date: new Date().toISOString().split("T")[0],
     time: new Date().toLocaleTimeString(),
   };

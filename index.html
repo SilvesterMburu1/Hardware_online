@@ -92,6 +92,7 @@
                 <th>Price</th>
                 <th>Stock</th>
                 <th>Action</th>
+                <th>Payment</th>
             </tr>
 
         </thead>
@@ -126,6 +127,13 @@
             required
         >
 
+      <select id="paymentMethod" required>
+    <option value="">Select Payment Method</option>
+    <option value="Cash">Cash</option>
+    <option value="M-Pesa">M-Pesa</option>
+    <option value="Bank Transfer">Bank Transfer</option>
+      </select>
+      
         <button type="submit">
             Sell Product
         </button>
@@ -179,6 +187,7 @@
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Total (KSh)</th>
+                <th>Payment</th>
                 <th>Date</th>
             </tr>
         </thead>

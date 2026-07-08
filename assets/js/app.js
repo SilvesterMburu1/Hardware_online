@@ -39,8 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const productId = document.getElementById("saleProduct").value;
     const quantity = document.getElementById("saleQuantity").value;
+    const paymentMethod = document.getElementById("paymentMethod").value;
 
-    recordSale(productId, quantity);
+    recordSale(productId, quantity, paymentMethod);
 
     displaySales();
 
@@ -85,6 +86,7 @@ function displaySales() {
                 <td>${sale.productName}</td>
                 <td>${sale.quantity}</td>
                 <td>KSh ${sale.total}</td>
+                <td>${sale.paymentMethod}</td>
                 <td>${sale.date} ${sale.time || ""}</td>
             </tr>
         `;
