@@ -22,10 +22,9 @@ function loadProductsIntoSelect() {
 
 function recordSale(productId, quantity) {
   
-  alert("recordSale is running")
-  
     const products = StorageManager.getProducts();
     const sales = StorageManager.getSales();
+    
 
     const product = products.find(p => p.id == productId);
 
@@ -41,10 +40,8 @@ function recordSale(productId, quantity) {
         return;
     }
 
-  console.log("Stock:", product.stock);
-console.log("Quantity:", quantity);
+  
 
-alert("Stock: " + product.stock + "\nQuantity: " + quantity);
 
     if (product.stock < quantity) {
         alert("Insufficient stock.");
@@ -59,7 +56,8 @@ alert("Stock: " + product.stock + "\nQuantity: " + quantity);
         productName: product.name,
         quantity: quantity,
         total: product.price * quantity,
-        date: new Date().toLocaleString()
+        date: new Date().toISOString().split("T")[0],
+        time: new Date(). toLocaleTimeString()
     };
 
     sales.push(sale);

@@ -7,6 +7,19 @@ document.addEventListener("DOMContentLoaded", () => {
     updateDashboard();
     displayProducts();
     displaySales();
+  document
+    .getElementById("filterReport")
+    .addEventListener("click", filterSales);
+
+document
+    .getElementById("clearFilter")
+    .addEventListener("click", () => {
+
+        document.getElementById("reportDate").value = "";
+
+        displaySales();
+
+    });
     loadProductsIntoSelect();
 
     searchInput.addEventListener("input", displayProducts);
@@ -75,7 +88,7 @@ function displaySales() {
     tbody.innerHTML = "";
 
     const sales = StorageManager.getSales();
-
+    console.log(sales);
     sales.forEach(sale => {
 
         tbody.innerHTML += `
@@ -83,7 +96,7 @@ function displaySales() {
                 <td>${sale.productName}</td>
                 <td>${sale.quantity}</td>
                 <td>KSh ${sale.total}</td>
-                <td>${sale.date}</td>
+                <td>${sale.date} ${sale.time || ""}</td>
             </tr>
         `;
 
@@ -148,5 +161,35 @@ function showToast(message) {
     setTimeout(() => {
         toast.classList.remove("show");
     }, 3000);
+
+}
+
+
+function filterSales() {
+
+    const selectedDate = document.getElementById("reportDate").value;
+
+    const tbody = document.querySelector("#salesTable tbody");
+
+    tbody.innerHTML = "";
+
+    const sales = StorageManager.getSales();
+
+    const filteredSales = sales.filter(sale =>
+        sale.date === selectedDate
+    );
+
+    filteredSales.forEach(sale => {
+
+        tbody.innerHTML += `
+            <tr>
+                <td>${sale.productName}</td>
+                <td>${sale.quantity}</td>
+                <td>KSh ${sale.total}</td>
+                <td>${sale.date} ${sale.time}</td>
+            </tr>
+        `;
+
+    });
 
 }
