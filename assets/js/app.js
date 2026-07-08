@@ -60,7 +60,10 @@ function updateDashboard() {
 
   // Total Revenue
   const revenue = sales.reduce((total, sale) => total + sale.total, 0);
+
+  const profit = sales.reduce((total, sale) => total + (sale.profit || 0), 0);
   document.getElementById("revenue").textContent = revenue;
+  document.getElementById("profit").textContent = profit;
 
   // Low Stock Products
   const lowStock = products.filter((product) => product.stock < 5);
