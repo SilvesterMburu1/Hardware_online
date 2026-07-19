@@ -1,240 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HardwarePOS Pro</title>
 
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
 
-<body>
+  <body>
+    <header class="header">
+      <h1>HardwarePOS Pro</h1>
+      <p>Smart Inventory & Sales System</p>
+    </header>
 
-<header class="header">
-    <h1>HardwarePOS Pro</h1>
-    <p>Smart Inventory & Sales System</p>
-</header>
+    <nav class="navbar">
+      <h2>🛠 HardwarePOS Pro</h2>
 
-<nav class="navbar">
-    <h2>🛠 HardwarePOS Pro</h2>
-
-    <div class="nav-links">
+      <div class="nav-links">
         <a href="#">Dashboard</a>
         <a href="#">Products</a>
         <a href="#">Sales</a>
         <a href="#">Reports</a>
-    </div>
-</nav>
+      </div>
+    </nav>
 
+    <main>
+      <section class="dashboard">
+        <section class="product-form">
+          <h2>Add Product</h2>
 
-<main>
-    <section class="dashboard">
-      <section class="product-form">
+          <form id="productForm">
+            <input
+              type="text"
+              id="productName"
+              placeholder="Product Name"
+              required
+            />
 
-    <h2>Add Product</h2>
+            <input
+              type="number"
+              id="productCost"
+              placeholder="Cost Price"
+              required
+            />
 
-    <form id="productForm">
+            <input
+              type="number"
+              id="productPrice"
+              placeholder="Price"
+              required
+            />
 
-        <input
-            type="text"
-            id="productName"
-            placeholder="Product Name"
-            required
-        >
+            <input
+              type="number"
+              id="productStock"
+              placeholder="Stock Quantity"
+              required
+            />
 
-      <input
-    type="number"
-    id="productCost"
-    placeholder="Cost Price"
-    required
-   >
-
-        <input
-            type="number"
-            id="productPrice"
-            placeholder="Price"
-            required
-        >
-
-      
-
-        <input
-            type="number"
-            id="productStock"
-            placeholder="Stock Quantity"
-            required
-        >
-
-        <button type="submit">
-            Add Product
-        </button>
-
-    </form>
-
-</section>
-      <section>
-        
-<section class="search-section">
-
-    <input
-        type="text"
-        id="searchInput"
-        placeholder="🔍 Search products..."
-    >
-
-</section>
-    <table id="productTable">
-
-        <thead>
-
-            <tr>
+            <button type="submit">Add Product</button>
+          </form>
+        </section>
+        <section>
+          <section class="search-section">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="🔍 Search products..."
+            />
+          </section>
+          <table id="productTable">
+            <thead>
+              <tr>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Stock</th>
                 <th>Action</th>
-                <th>Payment</th>
-            </tr>
+              </tr>
+            </thead>
 
-        </thead>
+            <tbody></tbody>
+          </table>
+        </section>
 
-        <tbody>
+        <h2>Record Sale</h2>
 
-        </tbody>
+        <form id="salesForm">
+          <select id="saleProduct" required>
+            <option value="">Select Product</option>
+          </select>
 
-    </table>
-
-</section>
-
-      <section class="sales-section">
-
-    <h2>Record Sale</h2>
-
-    <form id="salesForm">
-
-        <select id="saleProduct" required>
-
-            <option value="">
-                Select Product
-            </option>
-
-        </select>
-
-        <input
+          <input
             type="number"
             id="saleQuantity"
             placeholder="Quantity"
             min="1"
             required
-        >
+          />
 
-      <select id="paymentMethod" required>
-    <option value="">Select Payment Method</option>
-    <option value="Cash">Cash</option>
-    <option value="M-Pesa">M-Pesa</option>
-    <option value="Bank Transfer">Bank Transfer</option>
-      </select>
-      
-        <button type="submit">
-            Sell Product
-        </button>
+          <select id="paymentMethod" required>
+            <option value="">Select Payment Method</option>
+            <option value="Cash">Cash</option>
+            <option value="M-Pesa">M-Pesa</option>
+            <option value="Bank Transfer">Bank Transfer</option>
+          </select>
 
-    </form>
+          <button type="submit">Sell Product</button>
+        </form>
         <section class="sales-history">
-
-    <h2>Sales History</h2>
+          <h2>Sales History</h2>
 
           <div class="report-filter">
+            <label for="reportDate">Filter by Date:</label>
 
-    <label for="reportDate">Filter by Date:</label>
+            <input type="date" id="reportDate" />
 
-    <input type="date" id="reportDate">
+            <button type="button" id="filterReport">Filter</button>
 
-    <button id="filterReport">Filter</button>
+            <button type="button" id="clearFilter">Show All</button>
+          </div>
 
-    <button id="clearFilter">Show All</button>
-
-</div>
-
-    <table id="salesTable">
-
-        <thead>
-            <tr>
+          <table id="salesTable">
+            <thead>
+              <tr>
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Total</th>
+                <th>Payment</th>
                 <th>Date</th>
-            </tr>
-        </thead>
+              </tr>
+            </thead>
+          </table>
+        </section>
 
-        <tbody>
+        <section class="reports-section">
+          <h2>📊 Sales Report</h2>
 
-        </tbody>
-
-    </table>
-
-</section>
-
-</section>
-
-      <section class="reports-section">
-
-    <h2>📊 Sales Report</h2>
-
-    <table id="salesTable">
-
-        <thead>
-            <tr>
+          <table id="reportsTable">
+            <thead>
+              <tr>
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Total (KSh)</th>
                 <th>Payment</th>
                 <th>Date</th>
-            </tr>
-        </thead>
-
-        <tbody>
-
-        </tbody>
-
-    </table>
-
-</section>
+              </tr>
+            </thead>
+          </table>
+        </section>
 
         <div class="card">
-    <h3>📦 Total Products</h3>
-    <h1 id="productCount">0</h1>
-</div>
+          <h3>📦 Total Products</h3>
+          <h1 id="productCount">0</h1>
+        </div>
 
-<div class="card">
-    <h3>🛒 Total Sales</h3>
-    <h1 id="salesCount">0</h1>
-</div>
+        <div class="card">
+          <h3>🛒 Total Sales</h3>
+          <h1 id="salesCount">0</h1>
+        </div>
 
-      <div class="card">
-    <h3>Total Profit</h3>
-    <h1>KSh <span id="profit">0</span></h1>
-      </div>
-      
-<div class="card">
-    <h3>💰 Total revenue</h3>
-    <h1>KSh <span id="enue">0</span></h1>
-</div>
+        <div class="card">
+          <h3>Total Profit</h3>
+          <h1>KSh <span id="profit">0</span></h1>
+        </div>
 
-<div class="card">
-    <h3>⚠️ Low Stock</h3>
-    <h1 id="lowStock">0</h1>
-</div>
-    </section>
+        <div class="card">
+          <h3>💰 Total revenue</h3>
+          <h1>KSh <span id="revenue">0</span></h1>
+        </div>
 
-</>
+        <div class="card">
+          <h3>⚠️ Low Stock</h3>
+          <h1 id="lowStock">0</h1>
+        </div>
+      </section>
+    </main>
 
-</>
-
-<script src="assets/js/storage.js"></script>
-<script src="assets/js/products.js"></script>
-<script src="assets/js/sales.js"></script>
-<script src="assets/js/app.js"></script>
-<script src="assets/js/dashboard.js"></script>
-
-</body>
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/products.js"></script>
+    <script src="assets/js/sales.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+  </body>
 </html>

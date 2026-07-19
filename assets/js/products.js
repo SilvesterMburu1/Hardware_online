@@ -11,6 +11,8 @@ function addProduct(name, cost, price, stock) {
 
   products.push(product);
 
+  console.log(product);
+
   StorageManager.saveProducts(products);
   showToast("Product added successfully!");
 }

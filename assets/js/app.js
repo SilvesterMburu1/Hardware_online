@@ -6,28 +6,31 @@ document.addEventListener("DOMContentLoaded", () => {
   updateDashboard();
   displayProducts();
   displaySales();
+  loadProductsIntoSelect();
+
   document
     .getElementById("filterReport")
     .addEventListener("click", filterSales);
 
   document.getElementById("clearFilter").addEventListener("click", () => {
     document.getElementById("reportDate").value = "";
-
     displaySales();
   });
-  loadProductsIntoSelect();
 
   searchInput.addEventListener("input", displayProducts);
-
+  //console.log("Submitting product...");
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const name = document.getElementById("productName").value;
+    console.log("Submitting product...");
+
+    const productName = document.getElementById("productName").value;
     const cost = document.getElementById("productCost").value;
     const price = document.getElementById("productPrice").value;
     const stock = document.getElementById("productStock").value;
 
-    addProduct(name, cost, price, stock);
+    addProduct(productName, cost, price, stock);
+
     loadProductsIntoSelect();
     form.reset();
     displayProducts();
@@ -41,8 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const quantity = document.getElementById("saleQuantity").value;
     const paymentMethod = document.getElementById("paymentMethod").value;
 
-    recordSale(productId, quantity, paymentMethod);
+    let mpesaCode = "";
 
+    if (paymentMethod === "M-Pesa") {
+      mpesaCode = prompt("Enter M-Pesa Transaction Code:");
+
+      if (!mpesaCode) {
+        alert("Transaction cancelled.");
+        return;
+      }
+    }
+
+    recordSale(productId, quantity, paymentMethod, mpesaCode);
     displaySales();
 
     salesForm.reset();
@@ -94,6 +107,8 @@ function displaySales() {
 }
 
 function displayProducts() {
+  console.log(StorageManager.getProducts());
+
   const tbody = document.querySelector("#productTable tbody");
 
   if (!tbody) return;
@@ -149,6 +164,8 @@ function filterSales() {
 
   const tbody = document.querySelector("#salesTable tbody");
 
+  if (!tbody) return;
+
   tbody.innerHTML = "";
 
   const sales = StorageManager.getSales();
@@ -157,12 +174,13 @@ function filterSales() {
 
   filteredSales.forEach((sale) => {
     tbody.innerHTML += `
-            <tr>
-                <td>${sale.productName}</td>
-                <td>${sale.quantity}</td>
-                <td>KSh ${sale.total}</td>
-                <td>${sale.date} ${sale.time}</td>
-            </tr>
-        `;
+      <tr>
+        <td>${sale.productName}</td>
+        <td>${sale.quantity}</td>
+        <td>KSh ${sale.total}</td>
+        <td>${sale.paymentMethod}</td>
+        <td>${sale.date} ${sale.time || ""}</td>
+      </tr>
+    `;
   });
 }
