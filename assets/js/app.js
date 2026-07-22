@@ -22,8 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    console.log("Submitting product...");
-
     const productName = document.getElementById("productName").value;
     const cost = document.getElementById("productCost").value;
     const price = document.getElementById("productPrice").value;
@@ -31,8 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addProduct(productName, cost, price, stock);
 
-    loadProductsIntoSelect();
     form.reset();
+    loadProductsIntoSelect();
     displayProducts();
     updateDashboard();
   });
@@ -44,21 +42,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const quantity = document.getElementById("saleQuantity").value;
     const paymentMethod = document.getElementById("paymentMethod").value;
 
-    let mpesaCode = "";
+    let phoneNumber = "";
 
     if (paymentMethod === "M-Pesa") {
-      mpesaCode = prompt("Enter M-Pesa Transaction Code:");
+      phoneNumber = prompt("Enter customer's M-Pesa phone number:");
 
-      if (!mpesaCode) {
-        alert("Transaction cancelled.");
+      if (!phoneNumber) {
+        alert("Payment cancelled.");
         return;
       }
+
+      alert("Sending STK Push to " + phoneNumber);
+
+      // Simulate processing
+      alert("Payment Successful!");
     }
 
-    recordSale(productId, quantity, paymentMethod, mpesaCode);
-    displaySales();
-
+    recordSale(productId, quantity, paymentMethod, phoneNumber);
+    showToast("Sale recorded successfully!");
     salesForm.reset();
+    displaySales();
     displayProducts();
     updateDashboard();
     loadProductsIntoSelect();
@@ -95,20 +98,22 @@ function displaySales() {
   console.log(sales);
   sales.forEach((sale) => {
     tbody.innerHTML += `
-            <tr>
-                <td>${sale.productName}</td>
-                <td>${sale.quantity}</td>
-                <td>KSh ${sale.total}</td>
-                <td>${sale.paymentMethod}</td>
-                <td>${sale.date} ${sale.time || ""}</td>
-            </tr>
+<tr>
+<td>${sale.productName}</td>
+<td>${sale.quantity}</td>
+<td>KSh ${sale.total}</td>
+<td>
+${sale.paymentMethod}
+
+${sale.phoneNumber ? `<br><small>${sale.phoneNumber}</small>` : ""}
+
+</td>  
+                <td>${sale.date} ${sale.time || ""}</td>  
+            </tr>  
         `;
   });
 }
-
 function displayProducts() {
-  console.log(StorageManager.getProducts());
-
   const tbody = document.querySelector("#productTable tbody");
 
   if (!tbody) return;
@@ -125,23 +130,23 @@ function displayProducts() {
 
   filteredProducts.forEach((product) => {
     tbody.innerHTML += `
-            <tr>
-                <td>${product.name}</td>
-                <td>KSh ${product.price}</td>
-                <td>${product.stock}</td>
-                <td>
-                    <div class="action-buttons">
-                        <button class="edit-btn" onclick="editProduct(${product.id})">
-                            Edit
-                        </button>
+<tr>
+<td>${product.name}</td>
+<td>KSh ${product.price}</td>
+<td>${product.stock}</td>
+<td>
+<div class="action-buttons">
+<button class="edit-btn" onclick="editProduct(${product.id})">
+Edit
+</button>
 
-                        <button onclick="deleteProduct(${product.id})">
-                            Delete
-                        </button>
-                    </div>
-                </td>
-            </tr>
-        `;
+<button onclick="deleteProduct(${product.id})">  
+                        Delete  
+                    </button>  
+                </div>  
+            </td>  
+        </tr>  
+    `;
   });
 }
 
